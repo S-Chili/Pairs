@@ -2,19 +2,23 @@ const gameBoard = document.getElementById("game-board");
 const levelElement = document.getElementById("level");
 const attemptsElement = document.getElementById("attempts");
 
-const cardSymbols = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
+const cardImages = [
+  "images/alien.png",
+  "images/astronaut.png",
+  "images/astronaut1.png",
+  "images/constellation.png",
+  "images/moon.png",
+  "images/moon1.png",
+  "images/planet.png",
+  "images/planet1.png",
+  "images/planet2.png",
+  "images/robot.png",
+  "images/rocket.png",
+  "images/shooting-star.png",
+  "images/star.png",
+  "images/sun.png",
+  "images/supernova.png",
+  "images/ufo.png",
 ];
 
 let hasFlippedCard = false;
@@ -36,19 +40,19 @@ function shuffleCards(array) {
 
 function createBoard(level) {
   const pairsCount = level * 4;
-  const cardsToUse = cardSymbols.slice(0, pairsCount);
+  const cardsToUse = cardImages.slice(0, pairsCount);
   const gameCards = [...cardsToUse, ...cardsToUse];
 
   shuffleCards(gameCards);
 
   gameBoard.innerHTML = "";
-  gameCards.forEach((symbol) => {
+  gameCards.forEach((image) => {
     const cardElement = document.createElement("div");
     cardElement.classList.add("card");
     cardElement.innerHTML = `
-            <div class="front-face"></div>
-            <div class="back-face">${symbol}</div>
-        `;
+      <div class="front-face"></div>
+      <div class="back-face"><img src="${image}" alt="card image" /></div>
+    `;
     cardElement.addEventListener("click", flipCard);
     gameBoard.appendChild(cardElement);
   });
@@ -87,28 +91,29 @@ function flipCard() {
 function checkForMatch() {
   updateGameInfo();
 
-  const firstSymbol = firstCard.querySelector(".back-face").innerHTML;
-  const secondSymbol = secondCard.querySelector(".back-face").innerHTML;
+  const firstSymbol = firstCard.querySelector(".back-face img").src;
+  const secondSymbol = secondCard.querySelector(".back-face img").src;
 
   if (firstSymbol === secondSymbol) {
     disableCards();
     foundPairs++;
     if (foundPairs === currentLevel * 4) {
       setTimeout(() => {
-        alert("Вітаємо! Ви знайшли всі пари!");
+        alert("🎉 Вітаємо! Ви знайшли всі пари!");
         currentLevel++;
         startGame();
-      }, 1000);
+      }, 800);
     }
   } else {
     attempts++;
     unflipCards();
   }
+
   if (attempts >= maxAttempts) {
     setTimeout(() => {
-      alert("На жаль, ваші спроби закінчилися. Спробуйте ще раз!");
+      alert("😢 На жаль, спроби закінчилися. Спробуйте ще раз!");
       startGame();
-    }, 1000);
+    }, 800);
   }
 }
 
@@ -124,7 +129,7 @@ function unflipCards() {
     firstCard.classList.remove("flipped");
     secondCard.classList.remove("flipped");
     resetBoard();
-  }, 1000);
+  }, 800);
 }
 
 function resetBoard() {

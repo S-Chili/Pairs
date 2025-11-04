@@ -1,6 +1,6 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  font-family: "Poppins", sans-serif;
+  background-color: #fdfdfd;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,20 +11,23 @@ body {
 
 h1 {
   color: #333;
+  font-size: 2.2em;
+  margin-bottom: 10px;
 }
 
 .game-info {
   display: flex;
   justify-content: space-between;
   width: 300px;
-  margin-bottom: 20px;
-  font-size: 1.2em;
+  margin-bottom: 25px;
+  font-size: 1.1em;
+  color: #555;
 }
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(4, 100px); /* 4 стовпці, 8 карток */
-  grid-gap: 10px;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 15px;
 }
 
 .card {
@@ -34,6 +37,8 @@ h1 {
   transform-style: preserve-3d;
   transition: transform 0.6s;
   cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .card.flipped {
@@ -46,19 +51,35 @@ h1 {
   height: 100%;
   position: absolute;
   backface-visibility: hidden;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .front-face {
-  background-color: #3498db; /* Колір зворотної сторони картки */
-  border: 2px solid #2980b9;
+  background: linear-gradient(145deg, #74b9ff, #0984e3);
+  border: 2px solid #0984e3;
 }
 
 .back-face {
-  background-color: #ecf0f1; /* Колір лицьової сторони */
+  background-color: #fff;
   transform: rotateY(180deg);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3em;
+}
+
+.back-face img {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+body {
+  background: linear-gradient(180deg, #fff8e7 0%, #ffe5f2 100%);
+}
+.front-face {
+  background: linear-gradient(145deg, #a0c4ff, #74b9ff);
+}
+.back-face {
+  background-color: #fffafc;
 }
